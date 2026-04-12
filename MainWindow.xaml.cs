@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RBM.Data;
 
 namespace RBM
 {
@@ -19,6 +20,12 @@ namespace RBM
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var dbHelper = new DatabaseHelper();
+            dbHelper.InitializeDatabase();
         }
     }
 }

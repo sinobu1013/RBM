@@ -9,6 +9,8 @@ namespace RBM
     /// </summary>
     public partial class App : Application
     {
+
+
     }
 
 }
