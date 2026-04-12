@@ -31,7 +31,7 @@ namespace RBM
         private void save_button_Click(object sender, RoutedEventArgs e)
         {
             var dbHelper = new DatabaseHelper();
-            dbHelper.saveBookInfo("", "");
+            dbHelper.saveBookInfo(book_title.Text, book_author.Text);
         }
     }
 }

@@ -40,11 +40,13 @@ namespace RBM.Data
 
         public void saveBookInfo(string title, string author, DateTime? startDate=null, DateTime? endDate=null)
         {
+            System.Diagnostics.Debug.WriteLine(title, ", ", author);
+
             using (var connection = new SqliteConnection(_connectionString))
             {
                 var command = connection.CreateCommand();
                 StringBuilder bulider = new StringBuilder();
-                bulider.Append("INSERT INTO Books (Title, Author) VALUES('超かぐや姫', 'いろは');");
+                bulider.Append($"INSERT INTO Books (Title, Author) VALUES('{title}', '{author}');");
                 connection.Open();
                 command.CommandText = bulider.ToString();
                 command.ExecuteNonQuery();
