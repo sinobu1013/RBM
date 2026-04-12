@@ -25,26 +25,21 @@ namespace RBM
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var dbHelper = new DatabaseHelper();
-            dbHelper.InitializeDatabase();
-            
-            // 表の更新
-            upDateTable();
+            var dataBaseHelper = new DatabaseHelper();
+            dataBaseHelper.InitializeDatabase();
+
+            var recentBooks = dataBaseHelper.GetRecentBooks();
+            RecentBooks.ItemsSource = recentBooks;
         }
 
-        private void save_button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var dbHelper = new DatabaseHelper();
-            dbHelper.saveBookInfo(book_title.Text, book_author.Text);
-
-            // 表の描画を更新
-            upDateTable();
+            System.Diagnostics.Debug.WriteLine("Homeボタン押下");
         }
 
-        private void upDateTable()
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var dbHelper = new DatabaseHelper();
-            booksTable.ItemsSource = dbHelper.getBookInfo();
+            System.Diagnostics.Debug.WriteLine("履歴ボタン押下");
         }
     }
 }

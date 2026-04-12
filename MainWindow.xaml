@@ -5,24 +5,84 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RBM"
         mc:Ignorable="d"
-        Title="RBM" Height="768" Width="1024" Loaded="Window_Loaded" MinWidth="800" MinHeight="600">
+        Title="RBM" Height="768" Width="1024" MinWidth="800" MinHeight="600" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="21*"/>
+            <RowDefinition Height="355*"/>
         </Grid.RowDefinitions>
-        <StackPanel>
-            <TextBlock TextWrapping="Wrap" Text="入力" FontSize="14"/>
-            <TextBlock TextWrapping="Wrap"><Run Language="ja-jp" Text="タイトル"/></TextBlock>
-            <TextBox x:Name="book_title" TextWrapping="Wrap"/>
-            <TextBlock TextWrapping="Wrap" Text="著者"/>
-            <TextBox x:Name="book_author" TextWrapping="Wrap"/>
-            <Button x:Name="save_button" Content="保存" HorizontalAlignment="Right" Margin="0,0,10,0" Click="save_button_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="131*"/>
+            <ColumnDefinition Width="381*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel/>
+        <StackPanel Grid.Row="1" Margin="0,1,0,0">
+            <Button Content="Home" Grid.Row="1" Click="Button_Click" FontSize="18"/>
+            <Button Content="履歴（仮）" Grid.Row="1" Click="Button_Click_1" FontSize="18"/>
         </StackPanel>
-        <DockPanel Grid.Row="1">
-            <TextBlock TextWrapping="Wrap" DockPanel.Dock="Top" Text="出力" FontSize="14"/>
-            <DataGrid x:Name="booksTable" d:ItemsSource="{d:SampleData ItemCount=10}" AreRowDetailsFrozen="True"/>
-        </DockPanel>
+        <Rectangle x:Name="HeaderBg" Stroke="#FF93E78C" Grid.ColumnSpan="2" Fill="#FF93E78C"/>
+        <TextBlock Grid.Column="1" Margin="233,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16"><Run Language="ja-jp" Text="RBM"/></TextBlock>
+
+        <ItemsControl x:Name="RecentBooks" Grid.Column="1" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=2}" AlternationCount="3">
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border CornerRadius="10" Margin="30,15,30,0" Padding="15,5,15,5">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Background" Value="#FF706EDA" />
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <TranslateTransform Y="0" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                        <Setter Property="Background" Value="#FF8583E5"/>
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect BlurRadius="15" ShadowDepth="5" Opacity="0.3"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" 
+                                                         To="-5" Duration="0:0:0.2"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" 
+                                                         To="0" Duration="0:0:0.2"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), RelativeSource={RelativeSource AncestorType=ContentPresenter}}" Value="0">
+                                        <Setter Property="Background" Value="#FF706EDA"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), RelativeSource={RelativeSource AncestorType=ContentPresenter}}" Value="1">
+                                        <Setter Property="Background" Value="#FF6EA8DA"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), RelativeSource={RelativeSource AncestorType=ContentPresenter}}" Value="2">
+                                        <Setter Property="Background" Value="#FF6EDAAD"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Title}" FontSize="24" />
+                            <TextBlock Text="{Binding Author}" FontSize="20" />
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            
+        </ItemsControl>
 
     </Grid>
 </Window>

@@ -76,5 +76,33 @@ namespace RBM.Data
 
             return booksList;
         }
+
+        /// <summary>
+        /// 最初の２件だけを取得するメソッド
+        /// </summary>
+        /// <returns></returns>
+        public List<Book> GetRecentBooks()
+        {
+            var booksList = new List<Book>();
+
+            using (var connection = new SqliteConnection(_connectionString))
+            {
+                var command = connection.CreateCommand();
+                command.CommandText = @"SELECT * FROM Books ORDER BY Id DESC LIMIT 2;";
+                connection.Open();
+                using (var readeer = command.ExecuteReader())
+                {
+                    while (readeer.Read())
+                    {
+                        var book = new Book();
+                        book.Title = readeer["Title"].ToString();
+                        book.Author = readeer["Author"] as string;
+                        booksList.Add(book);
+                    }
+                }
+            }
+
+            return booksList;
+        }
     }
 }
