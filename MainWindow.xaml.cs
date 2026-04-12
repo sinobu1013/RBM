@@ -27,5 +27,11 @@ namespace RBM
             var dbHelper = new DatabaseHelper();
             dbHelper.InitializeDatabase();
         }
+
+        private void save_button_Click(object sender, RoutedEventArgs e)
+        {
+            var dbHelper = new DatabaseHelper();
+            dbHelper.saveBookInfo("", "");
+        }
     }
 }

@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RBM"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="RBM" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock TextWrapping="Wrap" Text="入力" FontSize="14"/>
+            <TextBlock TextWrapping="Wrap"><Run Language="ja-jp" Text="タイトル"/></TextBlock>
+            <TextBox x:Name="book_title" TextWrapping="Wrap"/>
+            <TextBlock TextWrapping="Wrap" Text="著者"/>
+            <TextBox x:Name="book_author" TextWrapping="Wrap"/>
+            <Button x:Name="save_button" Content="保存" HorizontalAlignment="Right" Margin="0,0,10,0" Click="save_button_Click"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <TextBlock TextWrapping="Wrap" Text="出力" FontSize="14"/>
+        </StackPanel>
 
     </Grid>
 </Window>

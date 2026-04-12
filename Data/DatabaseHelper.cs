@@ -37,5 +37,18 @@ namespace RBM.Data
                 }
             }
         }
+
+        public void saveBookInfo(string title, string author, DateTime? startDate=null, DateTime? endDate=null)
+        {
+            using (var connection = new SqliteConnection(_connectionString))
+            {
+                var command = connection.CreateCommand();
+                StringBuilder bulider = new StringBuilder();
+                bulider.Append("INSERT INTO Books (Title, Author) VALUES('超かぐや姫', 'いろは');");
+                connection.Open();
+                command.CommandText = bulider.ToString();
+                command.ExecuteNonQuery();
+            }
+        }
     }
 }
