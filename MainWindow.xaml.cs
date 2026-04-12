@@ -21,14 +21,15 @@ namespace RBM
         {
             InitializeComponent();
 
-            // 表の更新
-            upDateTable();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var dbHelper = new DatabaseHelper();
             dbHelper.InitializeDatabase();
+            
+            // 表の更新
+            upDateTable();
         }
 
         private void save_button_Click(object sender, RoutedEventArgs e)

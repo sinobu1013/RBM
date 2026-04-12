@@ -20,7 +20,7 @@
             <Button x:Name="save_button" Content="保存" HorizontalAlignment="Right" Margin="0,0,10,0" Click="save_button_Click"/>
         </StackPanel>
         <DockPanel Grid.Row="1">
-            <TextBlock TextWrapping="Wrap" Text="出力" FontSize="14"/>
+            <TextBlock TextWrapping="Wrap" DockPanel.Dock="Top" Text="出力" FontSize="14"/>
             <DataGrid x:Name="booksTable" d:ItemsSource="{d:SampleData ItemCount=10}" AreRowDetailsFrozen="True"/>
         </DockPanel>
 

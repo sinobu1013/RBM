@@ -41,8 +41,6 @@ namespace RBM.Data
 
         public void saveBookInfo(string title, string author, DateTime? startDate=null, DateTime? endDate=null)
         {
-            System.Diagnostics.Debug.WriteLine(title, ", ", author);
-
             using (var connection = new SqliteConnection(_connectionString))
             {
                 var command = connection.CreateCommand();
@@ -68,8 +66,8 @@ namespace RBM.Data
                     while (readeer.Read())
                     {
                         var book = new Book();
-                        book.Title = readeer.GetString(1);
-                        book.Author = readeer.GetString(2);
+                        book.Title = readeer["Title"].ToString();
+                        book.Author = readeer["Author"] as string;
                         booksList.Add(book);
                     }
 
