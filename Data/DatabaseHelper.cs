@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
+using RBM.Models;
 
 namespace RBM.Data
 {
@@ -51,6 +52,31 @@ namespace RBM.Data
                 command.CommandText = bulider.ToString();
                 command.ExecuteNonQuery();
             }
+        }
+
+        public List<Book> getBookInfo()
+        {
+            var booksList = new List<Book>();
+
+            using (var connection = new SqliteConnection(_connectionString))
+            {
+                var command = connection.CreateCommand();
+                command.CommandText = @"SELECT * FROM Books";
+                connection.Open();
+                using (var readeer = command.ExecuteReader())
+                {
+                    while (readeer.Read())
+                    {
+                        var book = new Book();
+                        book.Title = readeer.GetString(1);
+                        book.Author = readeer.GetString(2);
+                        booksList.Add(book);
+                    }
+
+                }
+            }
+
+            return booksList;
         }
     }
 }

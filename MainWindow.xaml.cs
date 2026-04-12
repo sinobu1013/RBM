@@ -20,6 +20,9 @@ namespace RBM
         public MainWindow()
         {
             InitializeComponent();
+
+            // 表の更新
+            upDateTable();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -32,6 +35,15 @@ namespace RBM
         {
             var dbHelper = new DatabaseHelper();
             dbHelper.saveBookInfo(book_title.Text, book_author.Text);
+
+            // 表の描画を更新
+            upDateTable();
+        }
+
+        private void upDateTable()
+        {
+            var dbHelper = new DatabaseHelper();
+            booksTable.ItemsSource = dbHelper.getBookInfo();
         }
     }
 }
