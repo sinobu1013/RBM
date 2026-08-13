@@ -23,7 +23,7 @@
         <Rectangle x:Name="HeaderBg" Stroke="#FF93E78C" Grid.ColumnSpan="2" Fill="#FF93E78C"/>
         <TextBlock Grid.Column="1" Margin="233,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16"><Run Language="ja-jp" Text="RBM"/></TextBlock>
 
-        <ItemsControl x:Name="RecentBooks" Grid.Column="1" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=2}" AlternationCount="3">
+        <ItemsControl x:Name="RecentBooks" Grid.Column="1" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=2}" AlternationCount="3" Margin="0,77,0,0" Padding="0,16,0,0" BorderThickness="2,2,2,2" BorderBrush="Black">
 
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
@@ -81,8 +81,20 @@
                     </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-            
+
         </ItemsControl>
+        <Label Content="Label" HorizontalAlignment="Center" Margin="0,-15,0,0"/>
+        <Button x:Name="newBooks" Grid.Column="1" Content="追加" HorizontalAlignment="Right" Margin="616,17,32,0" Grid.Row="1" VerticalAlignment="Top" Height="41" Width="115" Background="#FFFFD528" UseLayoutRounding="False" Click="newBooks_Click" FontSize="18">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <!-- CornerRadiusで角を丸めます -->
+                    <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Label Grid.Column="1" Content="今読んでいる本" HorizontalAlignment="Center" Margin="0,57,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="18" Background="White"/>
 
     </Grid>
 </Window>

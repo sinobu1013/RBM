@@ -41,5 +41,10 @@ namespace RBM
         {
             System.Diagnostics.Debug.WriteLine("履歴ボタン押下");
         }
+
+        private void newBooks_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("新規追加ボタン押下");
+        }
     }
 }
