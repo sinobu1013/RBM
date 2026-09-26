@@ -49,13 +49,7 @@
                 <Label Content="RBM" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
             </Grid>
         </Border>
-        <Grid Grid.Column="1" HorizontalAlignment="Left" Margin="0,76,0,0" Grid.RowSpan="2" Width="710">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="628.04"/>
-            </Grid.RowDefinitions>
-        </Grid>
-        
+
         <!-- 中身が入れ替わる部分 -->
         <ContentControl x:Name="MainContent" Grid.Column="1" Grid.Row="1" />
     </Grid>
