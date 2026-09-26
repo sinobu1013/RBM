@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
 
         <!-- 追加ボタンエリア -->
-        <Button x:Name="AddBookButton" Content="追加" HorizontalAlignment="Left" VerticalAlignment="Center" Width="96" Height="32" Margin="578,15,0,0" FontSize="18" Click="AddBookButton_Click" Padding="1,1,1,1">
+        <Button x:Name="AddBookButton" Content="追加" HorizontalAlignment="Left" VerticalAlignment="Center" Width="96" Height="32" Margin="578,15,0,0" FontSize="18" Click="AddBookButton_Click" Padding="1,1,1,1" Background="#FFDDDDDD">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <!-- CornerRadiusで角を丸めます -->

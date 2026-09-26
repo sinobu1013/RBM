@@ -49,7 +49,8 @@ namespace RBM
         // サイドバーの入力ボタン押下時
         public void NavigateToInputView()
         {
-
+            var inputView = new InputView();
+            MainContent.Content = inputView;
         }
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)

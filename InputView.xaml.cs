@@ -16,22 +16,13 @@ using System.Windows.Shapes;
 namespace RBM
 {
     /// <summary>
-    /// HomeView.xaml の相互作用ロジック
+    /// InputView.xaml の相互作用ロジック
     /// </summary>
-    public partial class HomeView : UserControl
+    public partial class InputView : UserControl
     {
-        public HomeView()
+        public InputView()
         {
             InitializeComponent();
-        }
-
-        private void AddBookButton_Click(object sender, RoutedEventArgs e)
-        {
-            // MainWindowを取得して画面切り替えのメソッドを呼ぶ
-            if (Window.GetWindow(this) is MainWindow mainWindow)
-            {
-                mainWindow.NavigateToInputView();
-            }
         }
     }
 }
