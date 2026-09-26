@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RBM.Data;
+using RBM.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,13 @@ namespace RBM
     /// </summary>
     public partial class InputView : UserControl
     {
-        public InputView()
+        private DatabaseHelper _databaseHelper;
+
+        public InputView(DatabaseHelper databaseHelper)
         {
             InitializeComponent();
+
+            _databaseHelper = databaseHelper;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -57,6 +63,44 @@ namespace RBM
             if (Window.GetWindow(this) is MainWindow mainWindow)
             {
                 mainWindow.NavigateToHomeVew();
+            }
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            Book book = new Book();
+            
+            // 入力値の格納
+            book.Title = TitleTextBox.Text;
+            book.Author = AuthorTextBox.Text;
+            book.StartDate = StartDatePicker.SelectedDate;
+
+            int pageCount = 0;
+            if (uint.TryParse(PageCountTextBox.Text, out var count))
+            {
+                pageCount = (int)count;
+            }
+            book.PageCount = pageCount;
+
+            // タイトルが空だったときにエラーダイアログを表示
+            if (string.IsNullOrEmpty(book.Title))
+            {
+                MessageBox.Show("タイトルを入力してください");
+                return;
+            }
+
+            // 情報を登録
+            if (_databaseHelper.saveBookInfo(book, out string errorMessage))
+            {
+                // MainWindowを取得して画面切り替えのメソッドを呼ぶ
+                if (Window.GetWindow(this) is MainWindow mainWindow)
+                {
+                    mainWindow.NavigateToHomeVew();
+                }
+            }
+            else
+            {
+                MessageBox.Show($"{errorMessage}");
             }
         }
     }

@@ -49,7 +49,7 @@ namespace RBM
         // サイドバーの入力ボタン押下時
         public void NavigateToInputView()
         {
-            var inputView = new InputView();
+            var inputView = new InputView(_databaseHelper);
             MainContent.Content = inputView;
         }
 

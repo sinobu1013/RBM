@@ -26,7 +26,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button x:Name="SaveButton" Content="登録" FontSize="24" Background="#FF2D9CFD" BorderBrush="Black" BorderThickness="1,1,1,1" ClipToBounds="True" Width="85" Height="35">
+            <Button x:Name="SaveButton" Content="登録" FontSize="24" Background="#FF2D9CFD" BorderBrush="Black" BorderThickness="1,1,1,1" ClipToBounds="True" Width="85" Height="35" Click="SaveButton_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <!-- CornerRadiusで角を丸めます -->

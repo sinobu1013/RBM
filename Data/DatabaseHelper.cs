@@ -27,6 +27,7 @@ namespace RBM.Data
                         Id INTEGER PRIMARY KEY AUTOINCREMENT,
                         Title TEXT NOT NULL,
                         Author TEXT,
+                        PageCount INTEGER,
                         StartDate TEXT,
                         EndDate TEXT
                     );";
@@ -39,16 +40,40 @@ namespace RBM.Data
             }
         }
 
-        public void saveBookInfo(string title, string author, DateTime? startDate=null, DateTime? endDate=null)
+        public bool saveBookInfo(Book book, out string errorMessage)
         {
-            using (var connection = new SqliteConnection(_connectionString))
+            // 入力データの準備
+            string? startDate = book.StartDate?.ToString("yyyy-MM-dd");
+            string? endDate = book.EndDate?.ToString("yyyy-MM-dd");
+
+            try
             {
-                var command = connection.CreateCommand();
-                StringBuilder bulider = new StringBuilder();
-                bulider.Append($"INSERT INTO Books (Title, Author) VALUES('{title}', '{author}');");
-                connection.Open();
-                command.CommandText = bulider.ToString();
-                command.ExecuteNonQuery();
+                using (var connection = new SqliteConnection(_connectionString))
+                {
+                    var command = connection.CreateCommand();
+                    connection.Open();
+                    command.CommandText = "INSERT INTO Books (Title, Author, PageCount, StartDate, EndDate) VALUES(" +
+                        " @Title," +
+                        " @Author," +
+                        " @PageCount," +
+                        " @StartDate," +
+                        " @EndDate);";
+
+                    command.Parameters.AddWithValue("@Title", book.Title);
+                    command.Parameters.AddWithValue("@Author", book.Author);
+                    command.Parameters.AddWithValue("@PageCount", book.PageCount);
+                    command.Parameters.AddWithValue("@StartDate", (object?)startDate ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@EndDate", (object?)endDate ?? DBNull.Value);
+
+                    command.ExecuteNonQuery();
+                }
+
+                errorMessage = string.Empty;
+                return true;
+            } catch (Exception ex)
+            {
+                errorMessage = ex.Message;
+                return false;
             }
         }
 
