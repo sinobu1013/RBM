@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace RBM.Models
 {
+    /// <summary>
+    /// 1冊の本のデータクラス
+    /// </summary>
     public class Book
     {
         /// <summary>

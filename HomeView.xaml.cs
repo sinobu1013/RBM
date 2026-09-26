@@ -16,19 +16,26 @@ using System.Windows.Shapes;
 namespace RBM
 {
     /// <summary>
-    /// HomeView.xaml の相互作用ロジック
+    /// Home画面
     /// </summary>
     public partial class HomeView : UserControl
     {
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public HomeView()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 追加ボタン押下時、入力画面を表示する
+        /// </summary>
         private void AddBookButton_Click(object sender, RoutedEventArgs e)
         {
             // MainWindowを取得して画面切り替えのメソッドを呼ぶ
-            if (Window.GetWindow(this) is MainWindow mainWindow)
+            MainWindow? mainWindow = Window.GetWindow(this) as MainWindow;
+            if (mainWindow != null)
             {
                 mainWindow.NavigateToInputView();
             }

@@ -18,12 +18,19 @@ using System.Windows.Shapes;
 namespace RBM
 {
     /// <summary>
-    /// InputView.xaml の相互作用ロジック
+    /// 入力画面
     /// </summary>
     public partial class InputView : UserControl
     {
+        /// <summary>
+        /// データベース制御用
+        /// </summary>
         private DatabaseHelper _databaseHelper;
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="databaseHelper">メイン画面から引き継ぐデータベース制御インスタンス</param>
         public InputView(DatabaseHelper databaseHelper)
         {
             InitializeComponent();
@@ -31,6 +38,9 @@ namespace RBM
             _databaseHelper = databaseHelper;
         }
 
+        /// <summary>
+        /// 画面読み込み時にカーソルと入力ボックス内の初期化
+        /// </summary>
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             // カーソルをタイトルのテキストボックスに移動
@@ -43,11 +53,17 @@ namespace RBM
             }
         }
 
+        /// <summary>
+        /// テキストボックスにカーソルが入った際に全選択をする
+        /// </summary>
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             (sender as TextBox)?.SelectAll();
         }
 
+        /// <summary>
+        /// ページ数の入力には正の整数のみを入力可とする
+        /// </summary>
         private void PageCountTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (!uint.TryParse(e.Text, out var _))
@@ -57,15 +73,22 @@ namespace RBM
             }
         }
 
+        /// <summary>
+        /// キャンセルボタン押下時、入力を破棄してHome画面へ遷移する
+        /// </summary>
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             // MainWindowを取得して画面切り替えのメソッドを呼ぶ
-            if (Window.GetWindow(this) is MainWindow mainWindow)
+            MainWindow? mainWindow = Window.GetWindow(this) as MainWindow;
+            if (mainWindow != null)
             {
-                mainWindow.NavigateToHomeVew();
+                mainWindow.NavigateToHomeView();
             }
         }
 
+        /// <summary>
+        /// 登録ボタン押下時、入力値を検証してDBへ保存しHome画面へ遷移する
+        /// </summary>
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             Book book = new Book();
@@ -90,12 +113,13 @@ namespace RBM
             }
 
             // 情報を登録
-            if (_databaseHelper.saveBookInfo(book, out string errorMessage))
+            if (_databaseHelper.SaveBookInfo(book, out string errorMessage))
             {
                 // MainWindowを取得して画面切り替えのメソッドを呼ぶ
-                if (Window.GetWindow(this) is MainWindow mainWindow)
+                MainWindow? mainWindow = Window.GetWindow(this) as MainWindow;
+                if (mainWindow != null)
                 {
-                    mainWindow.NavigateToHomeVew();
+                    mainWindow.NavigateToHomeView();
                 }
             }
             else

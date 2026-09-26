@@ -13,29 +13,40 @@ using RBM.Data;
 namespace RBM
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// メイン画面
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// データベース制御用
+        /// </summary>
         private DatabaseHelper _databaseHelper = new DatabaseHelper();
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
 
         }
 
+        /// <summary>
+        /// メイン画面ロード時、DBを初期化してHome画面を表示する
+        /// </summary>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // DB初期化
             _databaseHelper.InitializeDatabase();
 
             // 起動時はHomeViewを表示
-            NavigateToHomeVew();
+            NavigateToHomeView();
         }
 
-        // サイドバーのHomeボタン押下時
-        public void NavigateToHomeVew()
+        /// <summary>
+        /// Home画面へ遷移
+        /// </summary>
+        public void NavigateToHomeView()
         {
             var homeView = new HomeView();
 
@@ -46,16 +57,21 @@ namespace RBM
             MainContent.Content = homeView;
         }
 
-        // サイドバーの入力ボタン押下時
+        /// <summary>
+        /// 入力画面へ遷移
+        /// </summary>
         public void NavigateToInputView()
         {
             var inputView = new InputView(_databaseHelper);
             MainContent.Content = inputView;
         }
 
+        /// <summary>
+        /// サイドバーのHomeボタン押下時、Home画面を表示する
+        /// </summary>
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigateToHomeVew();
+            NavigateToHomeView();
         }
     }
 }

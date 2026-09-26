@@ -9,11 +9,19 @@ using RBM.Models;
 
 namespace RBM.Data
 {
+    /// <summary>
+    /// データベースを制御するクラス
+    /// </summary>
     public class DatabaseHelper
     {
-        // データベース接続用の文字列（DBファイルの名前）
+        /// <summary>
+        /// データベース接続用の文字列（DBファイルの名前）
+        /// </summary>
         private readonly string _connectionString = "Data Source=RBM.db";
 
+        /// <summary>
+        /// データベースの初期化（テーブルがなければ作成）
+        /// </summary>
         public void InitializeDatabase()
         {
             // データベースへの接続
@@ -40,7 +48,13 @@ namespace RBM.Data
             }
         }
 
-        public bool saveBookInfo(Book book, out string errorMessage)
+        /// <summary>
+        /// １冊の本の情報をデータベースに保存する
+        /// </summary>
+        /// <param name="book">保存する本の情報</param>
+        /// <param name="errorMessage">例外が発生したときにエラーメッセージが格納される</param>
+        /// <returns>成功した場合Trueが返る</returns>
+        public bool SaveBookInfo(Book book, out string errorMessage)
         {
             // 入力データの準備
             string? startDate = book.StartDate?.ToString("yyyy-MM-dd");
@@ -77,7 +91,11 @@ namespace RBM.Data
             }
         }
 
-        public List<Book> getBookInfo()
+        /// <summary>
+        /// すべての本のリストを返す
+        /// </summary>
+        /// <returns>すべての本情報のリスト</returns>
+        public List<Book> GetAllBookInfo()
         {
             var booksList = new List<Book>();
 
@@ -103,9 +121,9 @@ namespace RBM.Data
         }
 
         /// <summary>
-        /// 最初の２件だけを取得するメソッド
+        /// 直近に登録された2件の本情報を取得する
         /// </summary>
-        /// <returns></returns>
+        /// <returns>最初の２件だけの本情報</returns>
         public List<Book> GetRecentBooks()
         {
             var booksList = new List<Book>();
