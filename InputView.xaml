@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RBM"
              mc:Ignorable="d" 
-             d:DesignHeight="676.04" d:DesignWidth="710">
+             d:DesignHeight="676.04" d:DesignWidth="710" Loaded="UserControl_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -16,7 +16,7 @@
             <ColumnDefinition Width="45*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="1" Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,20,20">
-            <Button x:Name="CancelButton" Content="キャンセル" Margin="0,0,15,0" FontSize="24" Background="#FFE4F3FF" BorderBrush="Black" Width="130" Height="35">
+            <Button x:Name="CancelButton" Content="キャンセル" Margin="0,0,15,0" FontSize="24" Background="#FFE4F3FF" BorderBrush="Black" Width="130" Height="35" Click="CancelButton_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <!-- CornerRadiusで角を丸めます -->
@@ -26,7 +26,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button x:Name="EntryButton" Content="登録" FontSize="24" Background="#FF2D9CFD" BorderBrush="Black" BorderThickness="1,1,1,1" ClipToBounds="True" Width="85" Height="35">
+            <Button x:Name="SaveButton" Content="登録" FontSize="24" Background="#FF2D9CFD" BorderBrush="Black" BorderThickness="1,1,1,1" ClipToBounds="True" Width="85" Height="35">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <!-- CornerRadiusで角を丸めます -->
@@ -43,10 +43,10 @@
         <Label Grid.Column="1" Content="著者名：" HorizontalAlignment="Left" Margin="10,178,0,0" VerticalAlignment="Top" FontSize="24"/>
         <Label Grid.Column="1" Content="ペース数：" HorizontalAlignment="Left" Margin="10,225,0,0" VerticalAlignment="Top" FontSize="24"/>
         <Label Grid.Column="1" Content="読書開始日：" HorizontalAlignment="Left" Margin="10,272,0,0" VerticalAlignment="Top" FontSize="24"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="164,137,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="276" FontSize="24"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="164,184,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="276" FontSize="24"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="164,231,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="276" FontSize="24"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="164,275,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="276" FontSize="24"/>
+        <TextBox x:Name="TitleTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="164,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="276" FontSize="24" GotFocus="TextBox_GotFocus"/>
+        <TextBox x:Name="AuthorTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="164,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="276" FontSize="24" GotFocus="TextBox_GotFocus"/>
+        <TextBox x:Name="PageCountTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="164,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="276" FontSize="24" InputMethod.IsInputMethodEnabled="False" GotFocus="TextBox_GotFocus" PreviewTextInput="PageCountTextBox_PreviewTextInput"/>
+        <DatePicker x:Name="StartDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="164,281,0,0" VerticalAlignment="Top" Height="36" FontSize="24" Width="276"/>
 
     </Grid>
 </UserControl>
