@@ -17,6 +17,8 @@ namespace RBM
     /// </summary>
     public partial class MainWindow : Window
     {
+        private DatabaseHelper _databaseHelper = new DatabaseHelper();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -25,26 +27,34 @@ namespace RBM
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var dataBaseHelper = new DatabaseHelper();
-            dataBaseHelper.InitializeDatabase();
+            // DB初期化
+            _databaseHelper.InitializeDatabase();
 
-            var recentBooks = dataBaseHelper.GetRecentBooks();
-            RecentBooks.ItemsSource = recentBooks;
+            // 起動時はHomeViewを表示
+            NavigateToHomeVew();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        // サイドバーのHomeボタン押下時
+        public void NavigateToHomeVew()
         {
-            System.Diagnostics.Debug.WriteLine("Homeボタン押下");
+            var homeView = new HomeView();
+
+            // 今読んでいる本を取得
+            var recentBooks = _databaseHelper.GetRecentBooks();
+            homeView.RecentBooks.ItemsSource = recentBooks;
+
+            MainContent.Content = homeView;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        // サイドバーの入力ボタン押下時
+        public void NavigateToInputView()
         {
-            System.Diagnostics.Debug.WriteLine("履歴ボタン押下");
+
         }
 
-        private void newBooks_Click(object sender, RoutedEventArgs e)
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("新規追加ボタン押下");
+            NavigateToHomeVew();
         }
     }
 }

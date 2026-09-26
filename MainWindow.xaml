@@ -8,93 +8,55 @@
         Title="RBM" Height="768" Width="1024" MinWidth="800" MinHeight="600" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="21*"/>
-            <RowDefinition Height="355*"/>
+            <RowDefinition Height="19*"/>
+            <RowDefinition Height="169*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="131*"/>
-            <ColumnDefinition Width="381*"/>
+            <ColumnDefinition Width="157*"/>
+            <ColumnDefinition Width="355*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel/>
-        <StackPanel Grid.Row="1" Margin="0,1,0,0">
-            <Button Content="Home" Grid.Row="1" Click="Button_Click" FontSize="18"/>
-            <Button Content="履歴（仮）" Grid.Row="1" Click="Button_Click_1" FontSize="18"/>
-        </StackPanel>
-        <Rectangle x:Name="HeaderBg" Stroke="#FF93E78C" Grid.ColumnSpan="2" Fill="#FF93E78C"/>
-        <TextBlock Grid.Column="1" Margin="233,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="16"><Run Language="ja-jp" Text="RBM"/></TextBlock>
-
-        <ItemsControl x:Name="RecentBooks" Grid.Column="1" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=2}" AlternationCount="3" Margin="0,77,0,0" Padding="0,16,0,0" BorderThickness="2,2,2,2" BorderBrush="Black">
-
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border CornerRadius="10" Margin="30,15,30,0" Padding="15,5,15,5">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Setter Property="Background" Value="#FF706EDA" />
-                                <Setter Property="RenderTransform">
-                                    <Setter.Value>
-                                        <TranslateTransform Y="0" />
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Cursor" Value="Hand"/>
-                                        <Setter Property="Background" Value="#FF8583E5"/>
-                                        <Setter Property="Effect">
-                                            <Setter.Value>
-                                                <DropShadowEffect BlurRadius="15" ShadowDepth="5" Opacity="0.3"/>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Trigger.EnterActions>
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" 
-                                                         To="-5" Duration="0:0:0.2"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </Trigger.EnterActions>
-                                        <Trigger.ExitActions>
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" 
-                                                         To="0" Duration="0:0:0.2"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </Trigger.ExitActions>
-                                    </Trigger>
-                                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), RelativeSource={RelativeSource AncestorType=ContentPresenter}}" Value="0">
-                                        <Setter Property="Background" Value="#FF706EDA"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), RelativeSource={RelativeSource AncestorType=ContentPresenter}}" Value="1">
-                                        <Setter Property="Background" Value="#FF6EA8DA"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), RelativeSource={RelativeSource AncestorType=ContentPresenter}}" Value="2">
-                                        <Setter Property="Background" Value="#FF6EDAAD"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Title}" FontSize="24" />
-                            <TextBlock Text="{Binding Author}" FontSize="20" />
-                        </StackPanel>
+        <Border BorderBrush="Black" BorderThickness="0,0,1,0" Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                    <Button x:Name="HomeButton" Content="Home" FontSize="18" HorizontalContentAlignment="Left" Padding="32,1,9,1" VerticalContentAlignment="Center" Click="HomeButton_Click"/>
+                    <Button Content="一覧" FontSize="18" HorizontalContentAlignment="Left" Padding="32,1,9,1" VerticalContentAlignment="Center"/>
+                </StackPanel>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="24*"/>
+                        <RowDefinition Height="145*"/>
+                    </Grid.RowDefinitions>
+                    <Border BorderBrush="Black" BorderThickness="0,1,0,0">
+                        <Grid/>
                     </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
+                    <Label Content="分析ボード" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" FontSize="18"/>
 
-        </ItemsControl>
-        <Label Content="Label" HorizontalAlignment="Center" Margin="0,-15,0,0"/>
-        <Button x:Name="newBooks" Grid.Column="1" Content="追加" HorizontalAlignment="Right" Margin="616,17,32,0" Grid.Row="1" VerticalAlignment="Top" Height="41" Width="115" Background="#FFFFD528" UseLayoutRounding="False" Click="newBooks_Click" FontSize="18">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <!-- CornerRadiusで角を丸めます -->
-                    <Border Background="{TemplateBinding Background}" CornerRadius="10">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <Label Grid.Column="1" Content="今読んでいる本" HorizontalAlignment="Center" Margin="0,57,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="18" Background="White"/>
-
+                </Grid>
+            </Grid>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2">
+            <Border.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="#FF49DF3C"/>
+                    <GradientStop Color="#FF48DF3B" Offset="1"/>
+                </RadialGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Label Content="RBM" VerticalAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
+            </Grid>
+        </Border>
+        <Grid Grid.Column="1" HorizontalAlignment="Left" Margin="0,76,0,0" Grid.RowSpan="2" Width="710">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="628.04"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        
+        <!-- 中身が入れ替わる部分 -->
+        <ContentControl x:Name="MainContent" Grid.Column="1" Grid.Row="1" />
     </Grid>
 </Window>
