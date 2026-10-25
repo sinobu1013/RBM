@@ -23,19 +23,11 @@ namespace RBM
     public partial class InputView : UserControl
     {
         /// <summary>
-        /// データベース制御用
-        /// </summary>
-        private DatabaseHelper _databaseHelper;
-
-        /// <summary>
         /// コンストラクタ
         /// </summary>
-        /// <param name="databaseHelper">メイン画面から引き継ぐデータベース制御インスタンス</param>
-        public InputView(DatabaseHelper databaseHelper)
+        public InputView()
         {
             InitializeComponent();
-
-            _databaseHelper = databaseHelper;
         }
 
         /// <summary>
@@ -113,7 +105,7 @@ namespace RBM
             }
 
             // 情報を登録
-            if (_databaseHelper.SaveBookInfo(book, out string errorMessage))
+            if (App.BookManager.SaveBookInfo(book, out string errorMessage))
             {
                 // MainWindowを取得して画面切り替えのメソッドを呼ぶ
                 MainWindow? mainWindow = Window.GetWindow(this) as MainWindow;

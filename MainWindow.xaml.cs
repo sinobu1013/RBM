@@ -18,11 +18,6 @@ namespace RBM
     public partial class MainWindow : Window
     {
         /// <summary>
-        /// データベース制御用
-        /// </summary>
-        private DatabaseHelper _databaseHelper = new DatabaseHelper();
-
-        /// <summary>
         /// コンストラクタ
         /// </summary>
         public MainWindow()
@@ -32,13 +27,10 @@ namespace RBM
         }
 
         /// <summary>
-        /// メイン画面ロード時、DBを初期化してHome画面を表示する
+        /// メイン画面ロード時、Home画面を表示する
         /// </summary>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // DB初期化
-            _databaseHelper.InitializeDatabase();
-
             // 起動時はHomeViewを表示
             NavigateToHomeView();
         }
@@ -50,8 +42,8 @@ namespace RBM
         {
             var homeView = new HomeView();
 
-            // 今読んでいる本を取得
-            var recentBooks = _databaseHelper.GetRecentBooks();
+            // 今読んでいる本2件を取得
+            var recentBooks = App.BookManager.GetRecentBooks(2);
             homeView.RecentBooks.ItemsSource = recentBooks;
 
             MainContent.Content = homeView;
@@ -62,7 +54,7 @@ namespace RBM
         /// </summary>
         public void NavigateToInputView()
         {
-            var inputView = new InputView(_databaseHelper);
+            var inputView = new InputView();
             MainContent.Content = inputView;
         }
 

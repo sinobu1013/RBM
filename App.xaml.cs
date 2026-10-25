@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using RBM.Data;
+using System.Configuration;
 using System.Data;
 using System.Windows;
 
@@ -9,7 +10,7 @@ namespace RBM
     /// </summary>
     public partial class App : Application
     {
-
+        public static BookManager BookManager { get; } = new BookManager();
 
     }
 

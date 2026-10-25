@@ -111,37 +111,18 @@ namespace RBM.Data
                         var book = new Book();
                         book.Title = readeer["Title"].ToString();
                         book.Author = readeer["Author"] as string;
+
+                        if (readeer["StartDate"] != DBNull.Value)
+                        {
+                            if (DateTime.TryParse(readeer["StartDate"].ToString(), out DateTime date))
+                            {
+                                book.StartDate = date;
+                            }
+                        }
+
                         booksList.Add(book);
                     }
 
-                }
-            }
-
-            return booksList;
-        }
-
-        /// <summary>
-        /// 直近に登録された2件の本情報を取得する
-        /// </summary>
-        /// <returns>最初の２件だけの本情報</returns>
-        public List<Book> GetRecentBooks()
-        {
-            var booksList = new List<Book>();
-
-            using (var connection = new SqliteConnection(_connectionString))
-            {
-                var command = connection.CreateCommand();
-                command.CommandText = @"SELECT * FROM Books ORDER BY Id DESC LIMIT 2;";
-                connection.Open();
-                using (var readeer = command.ExecuteReader())
-                {
-                    while (readeer.Read())
-                    {
-                        var book = new Book();
-                        book.Title = readeer["Title"].ToString();
-                        book.Author = readeer["Author"] as string;
-                        booksList.Add(book);
-                    }
                 }
             }
 
