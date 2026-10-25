@@ -112,11 +112,21 @@ namespace RBM.Data
                         book.Title = readeer["Title"].ToString();
                         book.Author = readeer["Author"] as string;
 
+                        // 読書開始日の読み込み
                         if (readeer["StartDate"] != DBNull.Value)
                         {
-                            if (DateTime.TryParse(readeer["StartDate"].ToString(), out DateTime date))
+                            if (DateTime.TryParse(readeer["StartDate"].ToString(), out DateTime starttDate))
                             {
-                                book.StartDate = date;
+                                book.StartDate = starttDate;
+                            }
+                        }
+
+                        // 読書終了日の読み込み
+                        if (readeer["EndDate"] != DBNull.Value)
+                        {
+                            if (DateTime.TryParse(readeer["EndDate"].ToString(), out DateTime endDate))
+                            {
+                                book.EndDate = endDate;
                             }
                         }
 
