@@ -1,0 +1,82 @@
+﻿<Window x:Class="RBM.ListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RBM"
+        mc:Ignorable="d"
+        WindowState="Normal"
+        WindowStartupLocation="CenterScreen"
+        Title="ListWindow" Height="500" Width="1000">
+    <Grid Loaded="Grid_Loaded">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Content="登録書籍一覧" HorizontalAlignment="Left" Margin="15,15,0,15" VerticalAlignment="Center" FontSize="24" FontWeight="Bold"/>
+        <Button x:Name="ActiveMainWindowButton" Content="メイン画面を表示" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20" Width="168" Margin="0,0,15,0" Click="ActiveMainWindowButton_Click"/>
+        <DataGrid x:Name="AllBooksList" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" IsReadOnly="True" AutoGenerateColumns="False" FontSize="16">
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#FFDAEDF3" />
+                    <Setter Property="BorderBrush" Value="Black" />
+                    <Setter Property="BorderThickness" Value="0, 0, 1, 1" />
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                <DataGridTemplateColumn Header="状態">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border x:Name="StatusBorder" CornerRadius="10" Margin="5">
+                                <!-- スタイルを指定 -->
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <!-- デフォルトの色 -->
+                                        <Setter Property="Background" Value="Transparent" />
+                                        <Style.Triggers>
+                                            <!-- 読書中の時の色 -->
+                                            <DataTrigger Binding="{Binding Status}" Value="読書中" >
+                                                <Setter Property="Background" Value="LightPink" />
+                                            </DataTrigger>
+                                            <!-- 読了の時 -->
+                                            <DataTrigger Binding="{Binding Status}" Value="読了" >
+                                                <Setter Property="Background" Value="LightGreen" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Status}" />
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="タイトル" Binding="{Binding Title}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <!-- 幅を超えたら省略 -->
+                            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                            <!-- マウスオーバーで全文表示 -->
+                            <Setter Property="ToolTip" Value="{Binding Title}" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="著者名" Binding="{Binding Author}"/>
+                <DataGridTextColumn Header="ページ数" Binding="{Binding PageCount}"/>
+                <DataGridTextColumn Header="読書開始日" Binding="{Binding StartDate}"/>
+                <DataGridTextColumn Header="読書終了日" Binding="{Binding EndDate}"/>
+                <DataGridTemplateColumn Header="操作">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="詳細" Margin="2" />
+                                <Button Content="削除" Margin="2" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>

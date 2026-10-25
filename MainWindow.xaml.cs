@@ -18,6 +18,11 @@ namespace RBM
     public partial class MainWindow : Window
     {
         /// <summary>
+        /// 一覧画面のオブジェクト
+        /// </summary>
+        private ListWindow? _listWindow;
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         public MainWindow()
@@ -64,6 +69,25 @@ namespace RBM
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
             NavigateToHomeView();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (_listWindow == null)
+            {
+                _listWindow = new ListWindow();
+
+                // 閉じられた際はnullに戻す
+                _listWindow.Closing += (s, e) => _listWindow = null;
+
+                // 一覧画面を開く(平衡操作可能）
+                _listWindow.Show();
+
+            }
+            else
+            {
+                _listWindow.Activate();
+            }
         }
     }
 }

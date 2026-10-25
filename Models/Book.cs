@@ -40,5 +40,18 @@ namespace RBM.Models
         /// 総ページ数
         /// </summary>
         public int PageCount { get; set; } = 0;
+
+        /// <summary>
+        /// 読書状態（未読・読書中・読了）
+        /// </summary>
+        public string Status
+        {
+            get
+            {
+                if (EndDate != null) return "読了";
+                if (StartDate != null) return "読書中";
+                else return "未読";
+            }
+        }
     }
 }

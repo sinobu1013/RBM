@@ -23,7 +23,7 @@
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0">
                     <Button x:Name="HomeButton" Content="Home" FontSize="18" HorizontalContentAlignment="Left" Padding="32,1,9,1" VerticalContentAlignment="Center" Click="HomeButton_Click"/>
-                    <Button Content="一覧" FontSize="18" HorizontalContentAlignment="Left" Padding="32,1,9,1" VerticalContentAlignment="Center"/>
+                    <Button Content="一覧" FontSize="18" HorizontalContentAlignment="Left" Padding="32,1,9,1" VerticalContentAlignment="Center" Click="Button_Click"/>
                 </StackPanel>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
